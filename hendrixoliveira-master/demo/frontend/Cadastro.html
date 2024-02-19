@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Cadastro.css">
+    <link rel="stylesheet" href="telaInicial.css">
+    <title>Tela Inicial</title>
+</head>
+
+<body>
+    <header>
+        <h1>Seja Bem-Vindo à Nossa Loja</h1>
+
+    </header>
+
+    <main>
+        <section>
+            <h2>Cadastre-se</h2>
+            <form id="dados">
+                <label for="Usuario" id="enviar">Usuário:</label>
+                <input type="text" id="Usuario" name="Usuario" required>
+
+                <label for="senha" id="enviar">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required>
+
+                <label for="Email">Email:</label>
+                <input type="text" id="Email" name="Email" required>
+
+                <button type="submit" id="enviar">Cadastrar</button>
+                
+            </form>
+        </section>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        
+
+        <script>
+
+
+            $("#dados").on('submit', function () {
+                let dados = $("#dados").serialize();//Pega o form e transforma em objeto
+
+
+                $.post('http://localhost:8080/usuario', dados, function (retorno) {
+                    if (retorno == true) {
+                        alert("Usuario cadastrado com sucesso");
+                        document.location = "telaInicial.html"
+                    } else {
+                        alert("Deu probrema")
+                    }
+                });
+                return false;
+            });
+
+        </script>
+
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Nossa Loja</p>
+    </footer>
+</body>
+
+</html>

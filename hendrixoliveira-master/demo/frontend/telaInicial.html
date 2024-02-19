@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="telaInicial.css">
+    <link rel="stylesheet" href="script.js">
+    <title>Game Rush</title>
+</head>
+
+<body>
+    <header>
+        <h1>Game Rush</h1>
+        <nav>
+            <ul>
+                <li><a href="Login.html" target="_self">Login</a></li>
+                <li><a href="Cadastro.html" target="_self">Cadastrar</a></li>
+                <li><a href="telaInicial.html" target="_self">Início</a></li>
+                <li><a href="Carrinho.html" target="_self">Carrinho</a></li>
+                <li><a href="contato.html" target="_self">Contato</a></li>
+                <li><a href="AtualizarDados.html" target="_self">Atualizar Dados do Usuário</a></li>
+                <li><a href="CadastrarProduto.html" target="_self">Cadastrar Produto</a></li>
+                <li><a href="atualizarProduto.html">Atualizar Produto</a></li>
+            </ul>
+            <div class="pesquisa">
+                <input type="text" id="campoPesquisa" placeholder="Pesquisar produtos...">
+                <button id="botao-pesquisa">Pesquisar</button>
+            </div>
+        </nav>
+    </header>
+
+    
+        
+        <main id="Produto"> </main>
+
+        <div id="mensagemSemResultados" style="display: none;"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
+    <script>document.getElementById("botao-pesquisa").addEventListener("click", function () {
+        var termoPesquisa = document.getElementById("campoPesquisa").value.toLowerCase();
+        var Produtos = document.querySelectorAll('.produto');
+        var mensagemSemResultados = document.getElementById("mensagemSemResultados");
+
+        var encontrouResultados = false;
+
+        Produtos.forEach(function (Produto) {
+            var nomeProduto = Produto.getAttribute('data-nome').toLowerCase();
+            if (nomeProduto.includes(termoPesquisa)) {
+                produto.style.display = 'block';
+                encontrouResultados = true;
+            } else {
+                produto.style.display = 'none';
+            }
+        });
+
+        if (!encontrouResultados) {
+            Swal.fire({
+                title: 'Sem Resultados',
+                text: 'Não há Produtos com este nome',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Redirecionar para a tela inicial
+                window.location.href = 'telaInicial.html';
+            });
+        }
+
+        mensagemSemResultados.style.display = encontrouResultados ? 'none' : 'block';
+    });
+
+    $("#Produto").html("");
+    $.get('http://localhost:8080/Produto', function (Produto) {
+        console.log(Produto)
+        for (i = 0; i < Produto.length; i++) {
+            let tpl =
+                `        
+        <section class="produto" data-nome="${Produto[i].nome}">
+            <img src="sonic.png" alt="Produto">
+            <h2>${Produto[i].nomeProduto}</h2>
+            <h2><a>R$ </a>${Produto[i].valor}</h2>
+            <h2><a>Informações: </a>${Produto[i].descricao}</h2>
+            <br>
+            <button>Adicionar ao Carrinho</button>
+            <br><br>
+            <button onclick="confirmarRemocao(${Produto[i].id})">Remover</button>
+            <button onclick="editar(${Produto[i].id})">Editar</button>
+            <br><br>
+        </section>`;
+            $("#Produto").append(tpl);
+        }
+    });
+
+    function confirmarRemocao(id) {
+      if(confirm("Deseja remover o produto?")){
+        deletar(id);
+      }
+    }
+
+    function deletar(id) {
+        $.get('http://localhost:8080/Produto/remove/' + id,
+            function () {
+                document.location.reload();
+            }
+        );
+    }
+
+    function editar(id) {
+        sessionStorage.setItem('produtoEmEdicao', id)
+        document.location = 'AtualizarProduto.html'
+    }
+</script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputPesquisa = document.querySelector(".pesquisa input");
+            const Produtos = document.querySelectorAll(".produto");
+
+            inputPesquisa.addEventListener("input", function () {
+                const termoPesquisa = inputPesquisa.value.trim().toLowerCase();
+
+                Produtos.forEach(function (produto) {
+                    const nomeProduto = produto.querySelector("h2").textContent.toLowerCase();
+
+                    if (nomeProduto.includes(termoPesquisa)) {
+                        produto.style.display = "block";
+                    } else {
+                        produto.style.display = "none";
+                    }
+                });
+            });
+        });
+
+
+        src = "https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        $("#editar").on('click', function () {
+            let dados = $("#dados").serialize();//Pega o form e transforma em objeto
+
+
+            $.post('http://localhost:8080//' + $("#id").val(), dados, function (dados) {
+                if (dados == true) {
+                    getAll();
+                    alert("Dado alterado com sucesso");
+                } else {
+                    alert("Deu probrema")
+                }
+            });
+            return false;
+        });
+
+    </script>
+</body>
+
+</html>

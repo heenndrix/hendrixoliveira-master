@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="atualizarProduto.css">
+    <title>Atualizar Produto</title>
+    
+</head>
+<body>
+
+<div class="container">
+    <h2>Atualizar Produto</h2>
+    <form id="dados">
+        <label for="productName">Nome do Produto:</label>
+        <input type="text" id="NomeProduto" name="NomeProduto" required>
+
+        <label for="Valor">Valor do Produto:</label>
+        <input type="text" id="Valor" name="Valor" required>
+
+        <label for="Descricao" >Descrição do Produto:</label> <a href=""></a>
+        <textarea id="Descricao" name="Descricao" rows="4" required></textarea>
+
+        <button type="submit">concluido</button>
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script>
+
+    var  id = sessionStorage.getItem("produtoEmEdicao")
+
+
+        // Pegando os dados com getOne
+        $.get('http://localhost:8080/Produto/' + id, function (Produto) {
+            $("#NomeProduto").val(Produto.nomeProduto);
+            $("#Valor").val(Produto.valor);
+            $("#Descricao").val(Produto.descricao);
+        });
+
+
+        $("#dados").on('submit', function () {
+                let dados = $("#dados").serialize();//Pega o form e transforma em objeto
+
+
+                $.post('http://localhost:8080/Produto/'+id, dados, function (retorno) {
+                    if (retorno == true) {
+                        alert("produto atualizado com sucesso");
+                        document.location = "telaInicial.html"
+                    } else {
+                        alert("Deu probrema")
+                    }
+                });
+                return false;
+            });
+    
+</script>
+
+
+</body>
+</html>

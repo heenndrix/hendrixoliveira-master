@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" href="CadastrarProduto.css">
+</head>
+
+<body>
+    <header>
+        <h1>Cadastro de Produto</h1>
+        <nav>
+            <ul>
+                <li><a href="telaInicial.html" target="_self">Início</a></li>
+                <li><a href="Carrinho.html" target="_self">Carrinho</a></li>
+                <li><a href="contato.html" target="_self">Contato</a></li>
+                <li><a href="AtualizarDados.html" target="_self">Atualizar Dados do Usuário</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+        <h2>Cadastro de Produto</h2>
+        <form id="dados" action="processa" method="get">
+            <label for="NomeProduto">Nome do Produto:</label>
+            <input type="text" id="nomeProduto" name="nomeProduto" required><br>
+
+            <label for="valor">Valor:</label>
+            <input type="text" id="Valor" name="Valor" required><br>
+
+            <label for="Descricao">Descrição:</label>
+            <textarea id="Descricao" name="Descricao" rows="4" required></textarea><br>
+
+
+            <button type="submit" id="enviar">Cadastrar</button>
+        </form>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        
+
+        <script>
+            $("#dados").on('submit', function () {
+                let dados = $("#dados").serialize();//Pega o form e transforma em objeto
+
+
+                $.post('http://localhost:8080/Produto', dados, function (retorno) {
+                    if (retorno == true) {
+                        alert("Produto cadastrado com sucesso");
+                        document.location = "telaInicial.html"
+                    } else {
+                        alert("Deu probrema")
+                    }
+                });
+                return false;
+            });
+
+        </script>
+
+        <script>
+            
+        </script>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Minha Loja de Produtos</p>
+    </footer>
+</body>
+
+</html>

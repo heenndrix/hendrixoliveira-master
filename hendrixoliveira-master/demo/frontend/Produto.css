@@ -1,0 +1,140 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.produto {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    max-width: 600px;
+    position: relative;
+}
+
+.produto img {
+    max-width: 100px;
+    margin: 0 auto 10px auto;
+}
+
+.preco {
+    font-weight: bold;
+    color: #f00;
+}
+
+.fora-de-estoque {
+    background-color: #ccc;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.pesquisa input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.botao-pesquisa {
+    background-color: #f00;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.botao-pesquisa:hover {
+    background-color: #a00;
+}
+
+
+.produto {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.produto img {
+    max-width: 100%;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.descricao {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.preco {
+    font-weight: bold;
+    color: #f00;
+}
+
+.adicionar-ao-carrinho {
+    background-color: #f00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.adicionar-ao-carrinho:hover {
+    background-color: #a00;
+}

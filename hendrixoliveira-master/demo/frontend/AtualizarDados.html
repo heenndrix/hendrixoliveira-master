@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="AtualizarDados.css">
+    <title>Atualizar Dados do Usuário</title>
+</head>
+
+<body>
+    <header>
+        <h1>Atualizar Dados do Usuário</h1>
+        <nav>
+            <ul>
+                <li><a href="telaInicial.html" target="_self">Início</a></li>
+                <li><a href="Carrinho.html" target="_self">Carrinho</a></li>
+                <li><a href="contato.html" target="_self">Contato</a></li>
+                <li><a href="CadastrarProduto.html" target="_self">Cadastrar Produto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Atualizar Dados</h2>
+        <form id="dados" method="get">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" required><br>
+
+            <label for="senha">Senha:</label>
+            <input type="text" id="senha" name="senha" required><br>
+
+            <label for="dataNascimento">Data de Nascimento:</label>
+            <input type="date" id="dataNascimento" name="dataNascimento" required><br>
+
+            <label for="Email">Email:</label>
+            <input type="Email" id="Email" name="Email" required><br>
+
+            <input type="submit" value="Atualizar">
+        </form>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
+        <script>
+            
+        var  id = sessionStorage.getItem("idUsuario")
+        if(!id){
+            document.location = 'Login.html'
+        }
+
+
+    // Pegando os dados com getOne
+         $.get('http://localhost:8080/usuario/' + id, function (Usuario) {
+         $("#usuario").val(Usuario.usuario);
+         $("#senha").val(Usuario.senha);
+         var dataOriginal = new Date(Usuario.dataNascimento);
+          var dataFormatada = dataOriginal.toISOString().split('T')[0];
+         $("#dataNascimento").val(dataFormatada);
+         $("#Email").val(Usuario.email);
+    });
+
+
+
+        $("#dados").on('submit', function () {
+                let dados = $("#dados").serialize();//Pega o form e transforma em objeto
+
+
+                $.post('http://localhost:8080/usuario/'+id, dados, function (retorno) {
+                    if (retorno == true) {
+                        alert("Usuario atualizado com sucesso");
+                        document.location = "telaInicial.html"
+                    } else {
+                        alert("Deu probrema")
+                    }
+                });
+                return false;
+            });
+        </script>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Minha Loja de Produtos</p>
+    </footer>
+
+    
+</body>
+</html>

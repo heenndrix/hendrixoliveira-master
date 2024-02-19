@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Carrinho.css">
+    <title>Carrinho de Compras</title>
+</head>
+
+<body>
+    <header>
+        <h1>Carrinho de Compras</h1>
+        <nav>
+            <ul>
+                <li><a href="telaInicial.html" target="_self">Início</a></li>
+                <li><a href="carrinho.html" target="_self">Carrinho</a></li>
+                <li><a href="contato.html" target="_self">Contato</a></li>
+                <li><a href="AtualizarDados.html" target="_self">Atualizar Dados do Usuário</a></li>
+                <li><a href="CadastrarProduto.html" target="_self">Cadastrar Produto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="item-carrinho">
+            <img src="sonic.png" alt="Produto 1">
+            <div class="detalhes-produto">
+                <h2>Produto 1</h2>
+                <p>Descrição do Produto 1.</p>
+                <p class="preco">$19.99</p>
+            </div>
+            <div class="quantidade">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" value="1" min="1">
+            </div>
+        </section>
+
+        <section class="item-carrinho">
+            <img src="sonic.png" alt="Produto 2">
+            <div class="detalhes-produto">
+                <h2>Produto 2</h2>
+                <p>Descrição do Produto 2.</p>
+                <p class="preco">$29.99</p>
+            </div>
+            <div class="quantidade">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" value="1" min="1">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Total: $49.98</p>
+        <a href="finalizar.html" target="_self"><button class="botao-finalizar-compra">Finalizar Compra</button></a>
+    </footer>
+</body>
+
+</html>
